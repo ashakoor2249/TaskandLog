@@ -49,6 +49,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="TableRepositories\" />
+	  <Folder Include="Tables\" />
 	  <Folder Include="ViewModel\" />
 	</ItemGroup>
 
