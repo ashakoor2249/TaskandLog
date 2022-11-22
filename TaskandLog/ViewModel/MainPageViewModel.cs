@@ -17,9 +17,6 @@ public partial class MainPageViewModel : ObservableObject
 	public string date = DateTime.Now.ToString("dddd, MMMM dd, yyyy / HH:mm");
 
 	[ObservableProperty]
-	ObservableCollection<string> logTypeList;
-
-	[ObservableProperty]
 	public string selectedLogType;
 
 	[ObservableProperty]
@@ -27,6 +24,15 @@ public partial class MainPageViewModel : ObservableObject
 
 	[ObservableProperty]
 	public string description;
+
+	[ObservableProperty]
+	public string newLogEntry;
+
+	[ObservableProperty]
+	public string newLogEntryStatusMessage;
+
+	[ObservableProperty]
+	ObservableCollection<string> logTypeList;
 
 	public MainPageViewModel()
 	{
@@ -52,17 +58,17 @@ public partial class MainPageViewModel : ObservableObject
 		try
 		{
 			SharedComponents.LogEntryRepo.AddLogEntry(NewLogEntry);
-			NewRegion = "";
-			NewRegionStatusMessage = "Success: Region Added.";
+			NewLogEntry = "";
+			NewLogEntryStatusMessage = "Success: Region Added.";
 			await Task.Delay(2000);
-			NewRegionStatusMessage = "";
+			NewLogEntryStatusMessage = "";
 		}
 
 		catch (Exception ex)
 		{
-			NewRegionStatusMessage = "Error: Failed to add region. " + ex.Message;
+			NewLogEntryStatusMessage = "Error: Failed to add region. " + ex.Message;
 			await Task.Delay(2000);
-			NewRegionStatusMessage = "";
+			NewLogEntryStatusMessage = "";
 		}
 	}
 
