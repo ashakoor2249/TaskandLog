@@ -49,13 +49,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="TableRepositories\" />
-	  <Folder Include="Tables\" />
+	  <None Remove="Resources\Fonts\ArialBlack.ttf" />
+	  <None Remove="Resources\Fonts\TimesNewRoman.otf" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0-preview1" />
 	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="View\DatabasePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

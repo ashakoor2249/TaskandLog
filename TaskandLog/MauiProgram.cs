@@ -1,4 +1,6 @@
-﻿namespace TaskandLog;
+﻿using TaskandLog.ViewModel;
+
+namespace TaskandLog;
 
 public static class MauiProgram
 {
@@ -11,7 +13,13 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+				fonts.AddFont("ArialBlack.ttf", "ArialBlack");
+				fonts.AddFont("TimesNewRoman.otf", "Times");
 			});
+
+		builder.Services.AddSingleton<MainPage>();
+		builder.Services.AddSingleton<MainPageViewModel>();
+
 
 		return builder.Build();
 	}

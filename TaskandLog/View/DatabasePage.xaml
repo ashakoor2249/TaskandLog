@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaskandLog.View.DatabasePage"
+             Title="DatabasePage"
+             BackgroundColor="Green">
+
+
+    <ScrollView HorizontalScrollBarVisibility="Always" VerticalScrollBarVisibility="Always" Orientation="Both">
+
+        <VerticalStackLayout Padding="5">
+
+            <Label Text="----------TYPE SECTION START----------" FontSize="24" FontFamily="ArialBlack" 
+                   FontAttributes="Italic,Bold" HorizontalOptions="Center"></Label>
+
+            <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" Padding="10">
+
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" Padding="10">
+
+                    <Entry Text="{Binding NewType}" Placeholder="Enter Type Name" FontAutoScalingEnabled="True" 
+                           FontSize="20" FontFamily="ArialBlack" FontAttributes="Bold" TextColor="Black"/>
+
+                    <Button Command="{Binding AddNewTypeCommand}" Text="Add Type" TextColor="Black" 
+                            FontAutoScalingEnabled="True" FontSize="20" FontFamily="ArialBlack" FontAttributes="Bold"/>
+
+                </VerticalStackLayout>
+
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" Padding="10">
+
+                    <Entry  Text="{Binding RemoveType}" Placeholder="Enter a Type ID" FontAutoScalingEnabled="True" 
+                            FontSize="20" FontFamily="ArialBlack" FontAttributes="Bold" TextColor="Black"/>
+
+                    <Button Command="{Binding DeleteTypeCommand}" Text="Delete Type" TextColor="Black" 
+                            FontAutoScalingEnabled="True" FontSize="20" FontFamily="ArialBlack" FontAttributes="Bold"/>
+
+                </VerticalStackLayout>
+
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" Padding="10">
+
+                    <Button Command="{Binding GetAllTypesCommand}" Text="Get All Types" TextColor="Black" 
+                            FontAutoScalingEnabled="True" FontSize="20" FontFamily="ArialBlack" FontAttributes="Bold"/>
+
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" Padding="10">
+
+                <Frame VerticalOptions="Center" HorizontalOptions="Center" BorderColor="SandyBrown" HasShadow="True">
+
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" Padding="10">
+
+                        <Label Text="{Binding NewTypeStatusMessage}" TextColor="Black" FontSize="20" 
+                         FontFamily="ArialBlack" FontAttributes="Bold" FontAutoScalingEnabled="True" 
+                         VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="200"></Label>
+
+                        <Label Text="{Binding RemoveTypeStatusMessage}" TextColor="Black" FontSize="20" 
+                         FontFamily="ArialBlack" FontAttributes="Bold" FontAutoScalingEnabled="True" 
+                         VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="200"></Label>
+
+                    </VerticalStackLayout>
+
+                </Frame>
+
+                <Frame VerticalOptions="Center" HorizontalOptions="Center" BorderColor="SandyBrown" HasShadow="True">
+
+                    <ListView ItemsSource="{Binding TypeList}" VerticalOptions="Center" 
+                     HorizontalOptions="Center" WidthRequest="200" HeightRequest="100" 
+                     VerticalScrollBarVisibility="Always" >
+
+                        <ListView.Header>
+                            <Label TextColor="Black" FontSize="20" FontFamily="ArialBlack" 
+                             FontAttributes="Bold" FontAutoScalingEnabled="True" Margin="10,0,0,0" 
+                             HorizontalOptions="Center" Text="Region List"/>
+                        </ListView.Header>
+
+                    </ListView>
+
+                </Frame>
+
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>

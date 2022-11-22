@@ -1,6 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TaskandLog.MainPage">
-    
+             xmlns:viewmodel="clr-namespace:TaskandLog.ViewModel"
+             x:DataType="viewmodel:MainPageViewModel"
+             x:Class="TaskandLog.MainPage"
+             BackgroundColor="LightGreen">
+
+
+    <Grid RowDefinitions="100, 100, 100" ColumnDefinitions=".75, .25*" Padding="10" RowSpacing="10" ColumnSpacing="10">
+
+
+        <HorizontalStackLayout Grid.Row="0" Spacing="25">
+
+            <Button Command="{Binding AddLogEntryCommand}" Text="Add Log" HeightRequest="50"/>
+            <Button Command="{Binding RemoveLogCommand}" Text="Remove Log" HeightRequest="50"/>
+            <Button Command="{Binding ClearInputsCommand}" Text="Clear Inputs" HeightRequest="50"/>
+            <Button Command="{Binding EmailLogCommand}" Text="Email Log" HeightRequest="50"/>
+            <Button Command="{Binding RefreshLogCommand}" Text="Refresh Log" HeightRequest="50"/>
+            <Image Source="log_logo.png" BackgroundColor="Transparent"/>
+
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Grid.Row="1" Spacing="25" Padding="5" HorizontalOptions="Center" VerticalOptions="Center">
+
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+
+                <Label HorizontalOptions="Start" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" 
+                       TextColor="Black" Text="Enter Date"></Label>
+
+                <Entry Text="{Binding Date}" x:Name="selectStartDate" FontAttributes="Bold" FontSize="16"
+                     HorizontalTextAlignment="Start" VerticalTextAlignment="Start" TextColor="Black"></Entry>
+
+            </VerticalStackLayout>
+
+
+            <Picker ItemsSource="{Binding LogTypeList}" SelectedItem="{Binding SelectedLogType}" 
+                    SelectedIndexChanged="SelectLogType_SelectedIndexChanged" x:Name="selectLogType" 
+                    FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" TextColor="Black" 
+                    Title="Select Type"></Picker>
+
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+
+                <Label HorizontalOptions="Start" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" 
+                       TextColor="Black" Text="Enter Number"></Label>
+
+                <Entry Text="{Binding Number}" x:Name="selectNumber" FontAttributes="Bold" FontFamily="ArialBlack" 
+                       FontSize="16" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Start"></Entry>
+
+            </VerticalStackLayout>
+
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+
+                <Label HorizontalOptions="Start" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" 
+                       TextColor="Black" Text="Enter Description"></Label>
+
+                <Entry Text="{Binding Description}" x:Name="selectDescription" FontAttributes="Bold" FontFamily="ArialBlack" 
+                       FontSize="16" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" 
+                       WidthRequest="500"></Entry>
+
+            </VerticalStackLayout>
+
+        </HorizontalStackLayout>
+
+
+    </Grid>
+
 </ContentPage>
