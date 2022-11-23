@@ -33,6 +33,9 @@ public partial class MainPageViewModel : ObservableObject
 	public string newLogEntry;
 
 	[ObservableProperty]
+	ObservableCollection<string> logEntriesList= new ObservableCollection<string>();
+
+	[ObservableProperty]
 	public string newLogEntryStatusMessage;
 
     [ObservableProperty]
@@ -48,9 +51,10 @@ public partial class MainPageViewModel : ObservableObject
 			DB.DatabaseInit();
 
 		PopulateTypeList();
+		PoulateLogEntriesList();
 	}
 
-	public void PopulateTypeList()
+	async void PopulateTypeList()
 	{
 		try
 		{
@@ -63,7 +67,9 @@ public partial class MainPageViewModel : ObservableObject
 
 		catch (Exception ex)
 		{
-
+			NewLogEntryStatusMessage = "Error: Failed To Add Log. " + ex.Message;
+			await Task.Delay(2000);
+			NewLogEntryStatusMessage = "";
 		}
 	
 	}
@@ -74,7 +80,7 @@ public partial class MainPageViewModel : ObservableObject
 		
 		try
 		{
-			NewLogEntry = Date + " " + SelectedLogType + " " + Number + " " + Description;
+			NewLogEntry = Date + " " + Number + " " + Description;
 			LogEntryRepo.AddLogEntry(NewLogEntry);
 			NewLogEntry = "";
 			NewLogEntryStatusMessage = "Success: Log Added.";
@@ -91,25 +97,48 @@ public partial class MainPageViewModel : ObservableObject
 	}
 
 	[RelayCommand]
-	async void RemoveLog()
+	async void RemoveLogEntry()
+	{
+		
+	}
+
+	[RelayCommand]
+	async void PoulateLogEntriesList()
+	{
+		try
+		{
+			LogEntries = LogEntryRepo.GetLogEntries();
+			if (LogEntries != null)
+			{
+				foreach (LogEntry logentry in LogEntries)
+				{
+					logEntriesList.Add(logentry.Log_entry);
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+			NewLogEntryStatusMessage = "Error: " + ex.Message;
+			await Task.Delay(2000);
+			NewLogEntryStatusMessage = "";
+		}
+
+	}
+
+	[RelayCommand]
+	async void EmailLogEntries()
 	{
 
 	}
 
 	[RelayCommand]
-	async void ClearInputs()
+	public void ClearLogInputs()
 	{
-
-	}
-
-	[RelayCommand]
-	async void EmailLog()
-	{
-
-	}
-	[RelayCommand]
-	async void RefreshLog()
-	{
+		Date = DateTime.Now.ToString("dddd, MMMM dd, yyyy / HH:mm");
+		logTypeList?.Clear();
+		PopulateTypeList();
+		Number = "";
+		Description= "";
 
 	}
 }

@@ -7,18 +7,19 @@
              BackgroundColor="LightGreen">
 
 
-    <Grid RowDefinitions="100, 100, 100" ColumnDefinitions=".75, .25*" Padding="10" RowSpacing="10" ColumnSpacing="10">
+    <Grid RowDefinitions="100, 100, 100" Padding="10" RowSpacing="10" ColumnSpacing="10">
 
 
-        <HorizontalStackLayout Grid.Row="0" Spacing="25">
+        <HorizontalStackLayout HorizontalOptions="Center" Grid.Row="0" Spacing="25">
 
             <Button Command="{Binding AddLogEntryCommand}" Text="Add Log" HeightRequest="50"/>
-            <Button Command="{Binding RemoveLogCommand}" Text="Remove Log" HeightRequest="50"/>
-            <Button Command="{Binding ClearInputsCommand}" Text="Clear Inputs" HeightRequest="50"/>
-            <Button Command="{Binding EmailLogCommand}" Text="Email Log" HeightRequest="50"/>
-            <Button Command="{Binding RefreshLogCommand}" Text="Refresh Log" HeightRequest="50"/>
+            <Button Command="{Binding RemoveLogEntryCommand}" Text="Remove Log" HeightRequest="50"/>
+            <Button Command="{Binding PoulateLogEntriesListCommand}" Text="Refresh Log" HeightRequest="50"/>
+            <Button Command="{Binding EmailLogEntriesCommand}" Text="Email Log" HeightRequest="50"/>
+            <Button Command="{Binding ClearLogInputsCommand}" Text="Clear Log Inputs" HeightRequest="50"/>
+            
             <Image Source="log_logo.png" BackgroundColor="Transparent"/>
-
+            
             <Frame BorderColor="SandyBrown" VerticalOptions="Center" HorizontalOptions="Center" 
                  HasShadow="True">
 
@@ -79,6 +80,14 @@
             </VerticalStackLayout>
 
         </HorizontalStackLayout>
+
+        <CollectionView Grid.Row="2" Grid.ColumnSpan="2"
+                        ItemsSource="{Binding LogEntriesList}"
+                        SelectionMode="None">
+
+        </CollectionView>
+
+
 
 
     </Grid>
