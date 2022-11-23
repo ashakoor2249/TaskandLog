@@ -19,6 +19,24 @@
             <Button Command="{Binding RefreshLogCommand}" Text="Refresh Log" HeightRequest="50"/>
             <Image Source="log_logo.png" BackgroundColor="Transparent"/>
 
+            <Frame BorderColor="SandyBrown" VerticalOptions="Center" HorizontalOptions="Center" 
+                 HasShadow="True">
+
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" 
+                     Padding="10">
+
+                    <Label Text="{Binding NewLogEntryStatusMessage}" TextColor="Black" FontSize="16" 
+                         FontFamily="ArialBlack" FontAttributes="Bold" FontAutoScalingEnabled="True" 
+                         VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="200"></Label>
+
+                    <Label Text="{Binding RemoveLogEntryStatusMessage}" TextColor="Black" FontSize="16" 
+                         FontFamily="ArialBlack" FontAttributes="Bold" FontAutoScalingEnabled="True" 
+                         VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="200"></Label>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
         </HorizontalStackLayout>
 
         <HorizontalStackLayout Grid.Row="1" Spacing="25" Padding="5" HorizontalOptions="Center" VerticalOptions="Center">
@@ -56,7 +74,7 @@
 
                 <Entry Text="{Binding Description}" x:Name="selectDescription" FontAttributes="Bold" FontFamily="ArialBlack" 
                        FontSize="16" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" 
-                       WidthRequest="500"></Entry>
+                       WidthRequest="400"></Entry>
 
             </VerticalStackLayout>
 

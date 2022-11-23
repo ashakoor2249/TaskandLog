@@ -11,9 +11,13 @@ namespace TaskandLog.ViewModel;
 
 public partial class MainPageViewModel : ObservableObject
 {
-	readonly SharedComponents.SharedComponents SharedComponents;
 
-	[ObservableProperty]
+	public LogTypeRepository LogTypeRepo=new();
+	public LogEntryRepository LogEntryRepo=new();
+    public List<LogType> LogTypes = new();
+    public List<LogEntry> LogEntries = new();
+
+    [ObservableProperty]
 	public string date = DateTime.Now.ToString("dddd, MMMM dd, yyyy / HH:mm");
 
 	[ObservableProperty]
@@ -31,7 +35,10 @@ public partial class MainPageViewModel : ObservableObject
 	[ObservableProperty]
 	public string newLogEntryStatusMessage;
 
-	[ObservableProperty]
+    [ObservableProperty]
+    public string removeLogEntryStatusMessage;
+
+    [ObservableProperty]
 	ObservableCollection<string> logTypeList;
 
 	public MainPageViewModel()
@@ -45,28 +52,39 @@ public partial class MainPageViewModel : ObservableObject
 
 	public void PopulateTypeList()
 	{
-		SharedComponents.LogTypes = SharedComponents.LogTypeRepo.GetLogTypes();
-		foreach(LogType logtype in SharedComponents.LogTypes)
+		try
 		{
-			logTypeList.Add(logtype.Log_type_id.ToString() +" "+ logtype.Log_type_name);
+            LogTypes = LogTypeRepo.GetLogTypes();
+            foreach (LogType logtype in LogTypes)
+            {
+                logTypeList.Add(logtype.Log_type_name);
+            }
+        }
+
+		catch (Exception ex)
+		{
+
 		}
+	
 	}
 
 	[RelayCommand]
 	async void AddLogEntry()
 	{
+		
 		try
 		{
-			SharedComponents.LogEntryRepo.AddLogEntry(NewLogEntry);
+			NewLogEntry = Date + " " + SelectedLogType + " " + Number + " " + Description;
+			LogEntryRepo.AddLogEntry(NewLogEntry);
 			NewLogEntry = "";
-			NewLogEntryStatusMessage = "Success: Region Added.";
+			NewLogEntryStatusMessage = "Success: Log Added.";
 			await Task.Delay(2000);
 			NewLogEntryStatusMessage = "";
 		}
 
 		catch (Exception ex)
 		{
-			NewLogEntryStatusMessage = "Error: Failed to add region. " + ex.Message;
+			NewLogEntryStatusMessage = "Error: Failed To Add Log. " + ex.Message;
 			await Task.Delay(2000);
 			NewLogEntryStatusMessage = "";
 		}
