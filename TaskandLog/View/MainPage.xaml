@@ -7,8 +7,7 @@
              BackgroundColor="LightGreen">
 
 
-    <Grid RowDefinitions="100, 100, 100" Padding="10" RowSpacing="10" ColumnSpacing="10">
-
+    <Grid RowDefinitions="100, 100, 100,100" Padding="10" RowSpacing="10" ColumnSpacing="10">
 
         <HorizontalStackLayout HorizontalOptions="Center" Grid.Row="0" Spacing="25">
 
@@ -40,27 +39,29 @@
 
         </HorizontalStackLayout>
 
-        <HorizontalStackLayout Grid.Row="1" Spacing="25" Padding="5" HorizontalOptions="Center" VerticalOptions="Center">
+        <HorizontalStackLayout Grid.Row="1" Spacing="25" Padding="5">
 
-            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
-
-                <Label HorizontalOptions="Start" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" 
-                       TextColor="Black" Text="Enter Date"></Label>
-
-                <Entry Text="{Binding Date}" x:Name="selectStartDate" FontAttributes="Bold" FontSize="16"
-                     HorizontalTextAlignment="Start" VerticalTextAlignment="Start" TextColor="Black"></Entry>
-
+            <VerticalStackLayout>
+                
+                <DatePicker MinimumDate="{Binding MinDate}" MaximumDate="{Binding MaxDate}" Date="{Binding SelectedDate}" />
+                <TimePicker Time="{Binding SelectedTime}" />
+                
             </VerticalStackLayout>
+     
+            <VerticalStackLayout>
 
+                <Label FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" 
+                       TextColor="Black" Text="Select Type"></Label>
 
-            <Picker ItemsSource="{Binding LogTypeList}" SelectedItem="{Binding SelectedLogType}" 
+                <Picker ItemsSource="{Binding LogTypeList}" SelectedItem="{Binding SelectedLogType}" 
                     SelectedIndexChanged="SelectLogType_SelectedIndexChanged" x:Name="selectLogType" 
-                    FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" TextColor="Black" 
-                    Title="Select Type"></Picker>
+                    FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" TextColor="Black"></Picker>
+            </VerticalStackLayout>
+       
 
-            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <VerticalStackLayout>
 
-                <Label HorizontalOptions="Start" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" 
+                <Label FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" 
                        TextColor="Black" Text="Enter Number"></Label>
 
                 <Entry Text="{Binding Number}" x:Name="selectNumber" FontAttributes="Bold" FontFamily="ArialBlack" 
@@ -68,9 +69,9 @@
 
             </VerticalStackLayout>
 
-            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <VerticalStackLayout>
 
-                <Label HorizontalOptions="Start" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" 
+                <Label FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" 
                        TextColor="Black" Text="Enter Description"></Label>
 
                 <Entry Text="{Binding Description}" x:Name="selectDescription" FontAttributes="Bold" FontFamily="ArialBlack" 
@@ -81,9 +82,7 @@
 
         </HorizontalStackLayout>
 
-        <CollectionView Grid.Row="2" Grid.ColumnSpan="2"
-                        ItemsSource="{Binding LogEntriesList}"
-                        SelectionMode="None">
+        <CollectionView Grid.Row="2" Grid.RowSpan="2" ItemsSource="{Binding LogEntriesList}" SelectionMode="None">
 
         </CollectionView>
 

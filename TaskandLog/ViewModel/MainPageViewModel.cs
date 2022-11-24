@@ -2,10 +2,10 @@
 using CommunityToolkit.Mvvm.Input;
 using SQLite;
 using System.Collections.ObjectModel;
+using System.Data;
 using TaskandLog.Database;
 using TaskandLog.TableRepositories;
 using TaskandLog.Tables;
-using TaskandLog.SharedComponents;
 
 namespace TaskandLog.ViewModel;
 
@@ -17,8 +17,17 @@ public partial class MainPageViewModel : ObservableObject
     public List<LogType> LogTypes = new();
     public List<LogEntry> LogEntries = new();
 
-    [ObservableProperty]
-	public string date = DateTime.Now.ToString("dddd, MMMM dd, yyyy / HH:mm");
+	[ObservableProperty]
+	public DateTime selectedDate=DateTime.Today;
+
+	[ObservableProperty]
+	public DateTime minDate=DateTime.Today;
+
+	[ObservableProperty]
+	public DateTime maxDate=DateTime.MaxValue;
+
+	[ObservableProperty]
+	public TimeSpan selectedTime;
 
 	[ObservableProperty]
 	public string selectedLogType;
@@ -80,13 +89,15 @@ public partial class MainPageViewModel : ObservableObject
 		
 		try
 		{
-			NewLogEntry = Date + " " + Number + " " + Description;
+			
+			NewLogEntry = SelectedDate.ToLongDateString() +"/"+ SelectedTime+ " " + Number + " " + Description;
 			LogEntryRepo.AddLogEntry(NewLogEntry);
 			NewLogEntry = "";
 			NewLogEntryStatusMessage = "Success: Log Added.";
 			await Task.Delay(2000);
 			NewLogEntryStatusMessage = "";
-		}
+            PoulateLogEntriesList();
+        }
 
 		catch (Exception ex)
 		{
@@ -105,7 +116,8 @@ public partial class MainPageViewModel : ObservableObject
 	[RelayCommand]
 	async void PoulateLogEntriesList()
 	{
-		try
+        logEntriesList.Clear();
+        try
 		{
 			LogEntries = LogEntryRepo.GetLogEntries();
 			if (LogEntries != null)
@@ -134,12 +146,12 @@ public partial class MainPageViewModel : ObservableObject
 	[RelayCommand]
 	public void ClearLogInputs()
 	{
-		Date = DateTime.Now.ToString("dddd, MMMM dd, yyyy / HH:mm");
-		logTypeList?.Clear();
+        logTypeList?.Clear();
 		PopulateTypeList();
 		Number = "";
 		Description= "";
-
 	}
+
+	
 }
 	
