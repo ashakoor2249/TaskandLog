@@ -15,12 +15,14 @@ namespace TaskandLog.TableRepositories
 			DatabaseConnection.CreateTable<LogEntry>();
 		}
 
-		public void AddLogEntry(string Log_entry)
+		public void AddLogEntry(string Log_entry_date_time, string Log_entry_type, string Log_entry_description)
 		{
 			Init();
 			var logentry = new LogEntry
 			{
-				Log_entry = Log_entry
+				Log_entry_date_time=Log_entry_date_time,
+				Log_entry_type=Log_entry_type,
+				Log_entry_description=Log_entry_description
 
 			};
 			_ = DatabaseConnection.Insert(logentry);
@@ -32,15 +34,19 @@ namespace TaskandLog.TableRepositories
 			DatabaseConnection.Delete<LogEntry>(Log_entry_id);
 		}
 
-		public void UpdateLogEntry(int Log_entry_id, string Log_entry)
-		{
+		public void UpdateLogEntry(int Log_entry_id, string Log_entry_date_time, string Log_entry_type, string Log_entry_description)
+
+        {
 			Init();
 			var logentry = new LogEntry
 			{
 				Log_entry_id = Log_entry_id,
-				Log_entry = Log_entry,
+                Log_entry_date_time = Log_entry_date_time,
+                Log_entry_type = Log_entry_type,
+                Log_entry_description = Log_entry_description
 
-			};
+
+            };
 			_ = DatabaseConnection.Update(logentry);
 
 		}

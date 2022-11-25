@@ -17,7 +17,7 @@ public partial class MainPageViewModel : ObservableObject
     public List<LogType> LogTypes = new();
     public List<LogEntry> LogEntries = new();
 
-	[ObservableProperty]
+    [ObservableProperty]
 	public DateTime selectedDate=DateTime.Today;
 
 	[ObservableProperty]
@@ -26,23 +26,26 @@ public partial class MainPageViewModel : ObservableObject
 	[ObservableProperty]
 	public DateTime maxDate=DateTime.MaxValue;
 
-	[ObservableProperty]
-	public TimeSpan selectedTime;
+    [ObservableProperty]
+    public TimeSpan selectedTime;
 
-	[ObservableProperty]
-	public string selectedLogType;
+    [ObservableProperty]
+	public string dateAndTime;
 
-	[ObservableProperty]
+    [ObservableProperty]
+    ObservableCollection<string> logTypeList;
+
+    [ObservableProperty]
+    public string selectedLogType;
+
+    [ObservableProperty]
 	public string number; 
 
 	[ObservableProperty]
 	public string description;
 
 	[ObservableProperty]
-	public string newLogEntry;
-
-	[ObservableProperty]
-	ObservableCollection<string> logEntriesList= new ObservableCollection<string>();
+	ObservableCollection<string> logEntriesList= new();
 
 	[ObservableProperty]
 	public string newLogEntryStatusMessage;
@@ -50,10 +53,7 @@ public partial class MainPageViewModel : ObservableObject
     [ObservableProperty]
     public string removeLogEntryStatusMessage;
 
-    [ObservableProperty]
-	ObservableCollection<string> logTypeList;
-
-	public MainPageViewModel()
+    public MainPageViewModel()
 	{
 		logTypeList = new ObservableCollection<string>();
 		if (DB.DatabaseConnection == null)
@@ -89,10 +89,9 @@ public partial class MainPageViewModel : ObservableObject
 		
 		try
 		{
-			
-			NewLogEntry = SelectedDate.ToLongDateString() +"/"+ SelectedTime+ " " + Number + " " + Description;
-			LogEntryRepo.AddLogEntry(NewLogEntry);
-			NewLogEntry = "";
+			DateAndTime = SelectedDate.ToLongDateString() + "/" + SelectedTime;
+            LogEntryRepo.AddLogEntry(DateAndTime, Number, Description);
+			DateAndTime = "";
 			NewLogEntryStatusMessage = "Success: Log Added.";
 			await Task.Delay(2000);
 			NewLogEntryStatusMessage = "";
@@ -124,8 +123,13 @@ public partial class MainPageViewModel : ObservableObject
 			{
 				foreach (LogEntry logentry in LogEntries)
 				{
-					logEntriesList.Add(logentry.Log_entry);
-				}
+					logEntriesList.Add(
+						logentry.Log_entry_id+" "+
+						logentry.Log_entry_date_time+" "+
+						logentry.Log_entry_type + " " +
+                        logentry.Log_entry_description);
+
+                }
 			}
 		}
 		catch (Exception ex)

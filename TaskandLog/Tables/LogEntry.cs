@@ -12,6 +12,8 @@ namespace TaskandLog.Tables
 	{
         [PrimaryKey, AutoIncrement]
         public int Log_entry_id { get; set; }
-		public string Log_entry { get; set; }
+		public string Log_entry_date_time { get; set; }
+		public string Log_entry_type { get; set; }
+		public string Log_entry_description { get; set; }
 	}
 }

@@ -82,8 +82,12 @@
 
         </HorizontalStackLayout>
 
-        <CollectionView Grid.Row="2" Grid.RowSpan="2" ItemsSource="{Binding LogEntriesList}" SelectionMode="None">
+        <CollectionView ItemsSource="{Binding LogEntriesList}" Grid.Row="2" Grid.RowSpan="2" 
+                        VerticalOptions="Center" VerticalScrollBarVisibility="Always" HorizontalScrollBarVisibility="Always" 
+                        SelectionMode="None">
 
+            
+         
         </CollectionView>
 
 
