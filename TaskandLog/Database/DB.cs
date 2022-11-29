@@ -4,11 +4,11 @@ namespace TaskandLog.Database
 {
 	public class DB
 	{
-		public static string DatabasePath;
-		public static string DatabaseName;
-		public static SQLiteConnection DatabaseConnection;
+		public string DatabasePath { get; set; }
+		public string DatabaseName { get; set; }
+		public SQLiteConnection DatabaseConnection { get; set; }
 
-		public static SQLiteConnection DatabaseInit()
+		public SQLiteConnection DatabaseInit()
 		{
 			DatabaseName = "TaskAndLog.db";
 			DatabasePath = Path.Combine(FileSystem.AppDataDirectory, DatabaseName);

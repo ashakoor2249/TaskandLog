@@ -6,12 +6,12 @@ namespace TaskandLog.TableRepositories
 {
     public class LogTypeRepository
     {
-		public static SQLiteConnection DatabaseConnection;
+		readonly DB Database = new();
 
-		public static void Init()
+		public void Init()
 		{
-			DatabaseConnection = DB.DatabaseInit();
-			DatabaseConnection.CreateTable<LogType>();
+			Database.DatabaseConnection = Database.DatabaseInit();
+            Database.DatabaseConnection.CreateTable<LogType>();
 		}
 
 		public void AddLogType(string Log_type_name)
@@ -22,13 +22,13 @@ namespace TaskandLog.TableRepositories
 				Log_type_name = Log_type_name,
 				
 			};
-			_ = DatabaseConnection.Insert(logtype);
+			_ = Database.DatabaseConnection.Insert(logtype);
 		}
 
 		public void DeleteLogType(int Log_type_id)
 		{
 			Init();
-			DatabaseConnection.Delete<LogType>(Log_type_id);
+            Database.DatabaseConnection.Delete<LogType>(Log_type_id);
 		}
 
 		public void UpdateLogType(int Log_type_id, string Log_type_name)
@@ -40,14 +40,14 @@ namespace TaskandLog.TableRepositories
 				Log_type_name = Log_type_name,
 
 			};
-			_ = DatabaseConnection.Update(logtype);
+			_ = Database.DatabaseConnection.Update(logtype);
 
 		}
 
 		public List<LogType> GetLogTypes()
 		{
 			Init();
-			return DatabaseConnection.Table<LogType>().ToList();
+			return Database.DatabaseConnection.Table<LogType>().ToList();
 		}
 	}
 

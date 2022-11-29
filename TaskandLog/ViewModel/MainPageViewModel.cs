@@ -1,8 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SQLite;
 using System.Collections.ObjectModel;
-using System.Data;
 using TaskandLog.Database;
 using TaskandLog.TableRepositories;
 using TaskandLog.Tables;
@@ -11,8 +9,9 @@ namespace TaskandLog.ViewModel;
 
 public partial class MainPageViewModel : ObservableObject
 {
-
-	public LogTypeRepository LogTypeRepo=new();
+    readonly DB Database = new();
+	public ObservableCollection<LogEntry> Logs { get; set; } = new();
+    public LogTypeRepository LogTypeRepo=new();
 	public LogEntryRepository LogEntryRepo=new();
     public List<LogType> LogTypes = new();
     public List<LogEntry> LogEntries = new();
@@ -45,9 +44,6 @@ public partial class MainPageViewModel : ObservableObject
 	public string description;
 
 	[ObservableProperty]
-	ObservableCollection<string> logEntriesList= new();
-
-	[ObservableProperty]
 	public string newLogEntryStatusMessage;
 
     [ObservableProperty]
@@ -56,8 +52,8 @@ public partial class MainPageViewModel : ObservableObject
     public MainPageViewModel()
 	{
 		logTypeList = new ObservableCollection<string>();
-		if (DB.DatabaseConnection == null)
-			DB.DatabaseInit();
+		if (Database.DatabaseConnection == null)
+            Database.DatabaseInit();
 
 		PopulateTypeList();
 		PoulateLogEntriesList();
@@ -80,13 +76,11 @@ public partial class MainPageViewModel : ObservableObject
 			await Task.Delay(2000);
 			NewLogEntryStatusMessage = "";
 		}
-	
 	}
 
 	[RelayCommand]
 	async void AddLogEntry()
 	{
-		
 		try
 		{
 			DateAndTime = SelectedDate.ToLongDateString() + "/" + SelectedTime;
@@ -115,31 +109,20 @@ public partial class MainPageViewModel : ObservableObject
 	[RelayCommand]
 	async void PoulateLogEntriesList()
 	{
-        logEntriesList.Clear();
-        try
-		{
-			LogEntries = LogEntryRepo.GetLogEntries();
-			if (LogEntries != null)
-			{
-				foreach (LogEntry logentry in LogEntries)
-				{
-					logEntriesList.Add(
-						logentry.Log_entry_id+" "+
-						logentry.Log_entry_date_time+" "+
-						logentry.Log_entry_type + " " +
-                        logentry.Log_entry_description);
 
-                }
-			}
-		}
-		catch (Exception ex)
+        LogEntries.Clear();
+		LogEntries=LogEntryRepo.GetLogEntries();
+
+		if(Logs.Count!=0)
 		{
-			NewLogEntryStatusMessage = "Error: " + ex.Message;
-			await Task.Delay(2000);
-			NewLogEntryStatusMessage = "";
+			Logs.Clear();
 		}
 
-	}
+		foreach (var log in LogEntries) 
+		{
+			Logs.Add(log);
+		}
+    }
 
 	[RelayCommand]
 	async void EmailLogEntries()
@@ -156,6 +139,5 @@ public partial class MainPageViewModel : ObservableObject
 		Description= "";
 	}
 
-	
 }
 	

@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:TaskandLog.ViewModel"
+             xmlns:tables="clr-namespace:TaskandLog.Tables"
              x:DataType="viewmodel:MainPageViewModel"
              x:Class="TaskandLog.MainPage"
              BackgroundColor="LightGreen">
-
 
     <Grid RowDefinitions="100, 100, 100,100" Padding="10" RowSpacing="10" ColumnSpacing="10">
 
@@ -16,34 +16,18 @@
             <Button Command="{Binding PoulateLogEntriesListCommand}" Text="Refresh Log" HeightRequest="50"/>
             <Button Command="{Binding EmailLogEntriesCommand}" Text="Email Log" HeightRequest="50"/>
             <Button Command="{Binding ClearLogInputsCommand}" Text="Clear Log Inputs" HeightRequest="50"/>
-            
+
             <Image Source="log_logo.png" BackgroundColor="Transparent"/>
-            
-            <Frame BorderColor="SandyBrown" VerticalOptions="Center" HorizontalOptions="Center" 
-                 HasShadow="True">
-
-                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" 
-                     Padding="10">
-
-                    <Label Text="{Binding NewLogEntryStatusMessage}" TextColor="Black" FontSize="16" 
-                         FontFamily="ArialBlack" FontAttributes="Bold" FontAutoScalingEnabled="True" 
-                         VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="200"></Label>
-
-                    <Label Text="{Binding RemoveLogEntryStatusMessage}" TextColor="Black" FontSize="16" 
-                         FontFamily="ArialBlack" FontAttributes="Bold" FontAutoScalingEnabled="True" 
-                         VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="200"></Label>
-
-                </VerticalStackLayout>
-
-            </Frame>
 
         </HorizontalStackLayout>
 
-        <HorizontalStackLayout Grid.Row="1" Spacing="25" Padding="5">
+        <HorizontalStackLayout HorizontalOptions="Center" Grid.Row="1" Spacing="25" Padding="5">
 
             <VerticalStackLayout>
                 
-                <DatePicker MinimumDate="{Binding MinDate}" MaximumDate="{Binding MaxDate}" Date="{Binding SelectedDate}" />
+                <DatePicker MinimumDate="{Binding MinDate}" MaximumDate="{Binding MaxDate}" 
+                            Date="{Binding SelectedDate}" />
+                
                 <TimePicker Time="{Binding SelectedTime}" />
                 
             </VerticalStackLayout>
@@ -56,16 +40,17 @@
                 <Picker ItemsSource="{Binding LogTypeList}" SelectedItem="{Binding SelectedLogType}" 
                     SelectedIndexChanged="SelectLogType_SelectedIndexChanged" x:Name="selectLogType" 
                     FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" TextColor="Black"></Picker>
+                
             </VerticalStackLayout>
        
-
             <VerticalStackLayout>
 
                 <Label FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" 
                        TextColor="Black" Text="Enter Number"></Label>
 
-                <Entry Text="{Binding Number}" x:Name="selectNumber" FontAttributes="Bold" FontFamily="ArialBlack" 
-                       FontSize="16" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Start"></Entry>
+                <Entry Text="{Binding Number}" x:Name="selectNumber" FontAttributes="Bold" 
+                       FontFamily="ArialBlack" FontSize="16" TextColor="Black" HorizontalTextAlignment="Start" 
+                       VerticalTextAlignment="Start"></Entry>
 
             </VerticalStackLayout>
 
@@ -74,24 +59,48 @@
                 <Label FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" 
                        TextColor="Black" Text="Enter Description"></Label>
 
-                <Entry Text="{Binding Description}" x:Name="selectDescription" FontAttributes="Bold" FontFamily="ArialBlack" 
-                       FontSize="16" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" 
-                       WidthRequest="400"></Entry>
+                <Entry Text="{Binding Description}" x:Name="selectDescription" FontAttributes="Bold" 
+                       FontFamily="ArialBlack" FontSize="16" TextColor="Black" HorizontalTextAlignment="Start" 
+                       VerticalTextAlignment="Start" WidthRequest="400"></Entry>
 
             </VerticalStackLayout>
 
         </HorizontalStackLayout>
 
-        <CollectionView ItemsSource="{Binding LogEntriesList}" Grid.Row="2" Grid.RowSpan="2" 
-                        VerticalOptions="Center" VerticalScrollBarVisibility="Always" HorizontalScrollBarVisibility="Always" 
-                        SelectionMode="None">
-
+        <CollectionView ItemsSource="{Binding Logs}" Grid.Row="2" Grid.RowSpan="3" VerticalScrollBarVisibility="Always" 
+                        HorizontalScrollBarVisibility="Always" 
+                        SelectionMode="Single" SelectionChangedCommand="{Binding RemoveLogEntryCommand}">
             
-         
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="tables:LogEntry">
+                    <Grid Padding="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="400" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="400" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Label Grid.Row="1" Text="{Binding Log_entry_id}" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" 
+                               HorizontalOptions="Start"/>
+
+                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Log_entry_date_time}" FontAttributes="Bold" 
+                               FontFamily="ArialBlack" FontSize="16" HorizontalOptions="Start"/>
+
+                        <Label Grid.Row="1" Grid.Column="2" Text="{Binding Log_entry_type}" FontAttributes="Bold" 
+                               FontFamily="ArialBlack" FontSize="16" HorizontalOptions="Start"/>
+
+                        <Label Grid.Row="1" Grid.Column="3" Text="{Binding Log_entry_description}" FontAttributes="Bold" 
+                               FontFamily="ArialBlack" FontSize="16" HorizontalOptions="Start" LineBreakMode="WordWrap"/>
+                        
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
         </CollectionView>
-
-
-
 
     </Grid>
 
