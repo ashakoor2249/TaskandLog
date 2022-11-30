@@ -13,13 +13,31 @@
 
             <Button Command="{Binding AddLogEntryCommand}" Text="Add Log" HeightRequest="50"/>
             <Button Command="{Binding RemoveLogEntryCommand}" Text="Remove Log" HeightRequest="50"/>
-            <Button Command="{Binding PoulateLogEntriesListCommand}" Text="Refresh Log" HeightRequest="50"/>
             <Button Command="{Binding EmailLogEntriesCommand}" Text="Email Log" HeightRequest="50"/>
             <Button Command="{Binding ClearLogInputsCommand}" Text="Clear Log Inputs" HeightRequest="50"/>
-
             <Image Source="log_logo.png" BackgroundColor="Transparent"/>
 
-        </HorizontalStackLayout>
+     
+                <Frame BorderColor="SandyBrown" HorizontalOptions="Center" 
+                 HasShadow="True">
+
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" 
+                     Padding="10">
+
+                        <Label Text="{Binding NewLogEntryStatusMessage}" TextColor="Black" FontSize="20" 
+                         FontFamily="ArialBlack" FontAttributes="Bold" FontAutoScalingEnabled="True" 
+                         VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="200"></Label>
+
+                        <Label Text="{Binding NewLogEntryStatusMessage}" TextColor="Black" FontSize="20" 
+                         FontFamily="ArialBlack" FontAttributes="Bold" FontAutoScalingEnabled="True" 
+                         VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="200"></Label>
+
+                    </VerticalStackLayout>
+
+                </Frame>
+
+
+            </HorizontalStackLayout>
 
         <HorizontalStackLayout HorizontalOptions="Center" Grid.Row="1" Spacing="25" Padding="5">
 
@@ -67,9 +85,8 @@
 
         </HorizontalStackLayout>
 
-        <CollectionView ItemsSource="{Binding Logs}" Grid.Row="2" Grid.RowSpan="3" VerticalScrollBarVisibility="Always" 
-                        HorizontalScrollBarVisibility="Always" 
-                        SelectionMode="Single" SelectionChangedCommand="{Binding RemoveLogEntryCommand}">
+        <CollectionView ItemsSource="{Binding Logs}" SelectedItem="{Binding SelectedLog}" x:Name="selectLog" Grid.Row="2" Grid.RowSpan="3" VerticalScrollBarVisibility="Always" 
+                        HorizontalScrollBarVisibility="Always" SelectionMode="Single">
             
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="tables:LogEntry">

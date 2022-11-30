@@ -4,13 +4,13 @@ using System.Collections.ObjectModel;
 using TaskandLog.Database;
 using TaskandLog.TableRepositories;
 using TaskandLog.Tables;
+using TaskandLog.View;
 
 namespace TaskandLog.ViewModel;
 
 public partial class MainPageViewModel : ObservableObject
 {
     readonly DB Database = new();
-	public ObservableCollection<LogEntry> Logs { get; set; } = new();
     public LogTypeRepository LogTypeRepo=new();
 	public LogEntryRepository LogEntryRepo=new();
     public List<LogType> LogTypes = new();
@@ -32,7 +32,7 @@ public partial class MainPageViewModel : ObservableObject
 	public string dateAndTime;
 
     [ObservableProperty]
-    ObservableCollection<string> logTypeList;
+    ObservableCollection<string> logTypeList=new();
 
     [ObservableProperty]
     public string selectedLogType;
@@ -48,13 +48,17 @@ public partial class MainPageViewModel : ObservableObject
 
     [ObservableProperty]
     public string removeLogEntryStatusMessage;
+    public ObservableCollection<LogEntry> Logs { get; set; } = new();
+
+	[ObservableProperty]
+	public LogEntry selectedLog;
 
     public MainPageViewModel()
 	{
-		logTypeList = new ObservableCollection<string>();
 		if (Database.DatabaseConnection == null)
+		{
             Database.DatabaseInit();
-
+        }
 		PopulateTypeList();
 		PoulateLogEntriesList();
 	}
@@ -103,11 +107,28 @@ public partial class MainPageViewModel : ObservableObject
 	[RelayCommand]
 	async void RemoveLogEntry()
 	{
-		
-	}
+		int LogId;
+		if(SelectedLog==null)
+		{
+			NewLogEntryStatusMessage = "Error: Select a Log Entry.";
+			return;
+        }
+        LogId = SelectedLog.Log_entry_id;
+        try
+		{
+            LogEntryRepo.DeleteLogEntry(LogId);
+            PoulateLogEntriesList();
+        }
+		catch (Exception ex)
+		{
+            NewLogEntryStatusMessage = "Error: Failed To Remove Log. " + ex.Message;
+            await Task.Delay(2000);
+            NewLogEntryStatusMessage = "";
+        }
+    }
 
 	[RelayCommand]
-	async void PoulateLogEntriesList()
+	public void PoulateLogEntriesList()
 	{
 
         LogEntries.Clear();
@@ -127,7 +148,7 @@ public partial class MainPageViewModel : ObservableObject
 	[RelayCommand]
 	async void EmailLogEntries()
 	{
-
+	
 	}
 
 	[RelayCommand]
