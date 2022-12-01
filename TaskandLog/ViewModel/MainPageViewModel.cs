@@ -4,54 +4,39 @@ using System.Collections.ObjectModel;
 using TaskandLog.Database;
 using TaskandLog.TableRepositories;
 using TaskandLog.Tables;
-using TaskandLog.View;
 
 namespace TaskandLog.ViewModel;
 
 public partial class MainPageViewModel : ObservableObject
 {
     readonly DB Database = new();
-    public LogTypeRepository LogTypeRepo=new();
-	public LogEntryRepository LogEntryRepo=new();
+    public LogTypeRepository LogTypeRepo = new();
+    public LogEntryRepository LogEntryRepo = new();
     public List<LogType> LogTypes = new();
     public List<LogEntry> LogEntries = new();
 
-    [ObservableProperty]
-	public DateTime selectedDate=DateTime.Today;
+    [ObservableProperty]public int updatedLogEntryId;
+	[ObservableProperty] public string updatedLogEntryDateAndTime;
+	[ObservableProperty] public string updatedLogEntryNumber;
+    [ObservableProperty] public string updatedLogEntryDescription;
 
-	[ObservableProperty]
-	public DateTime minDate=DateTime.Today;
+    [ObservableProperty]public DateTime selectedDate=DateTime.Today;
+	[ObservableProperty]public DateTime minDate=DateTime.Today;
+	[ObservableProperty]public DateTime maxDate=DateTime.MaxValue;
+    [ObservableProperty]public TimeSpan selectedTime;
+    [ObservableProperty]public string dateAndTime;
 
-	[ObservableProperty]
-	public DateTime maxDate=DateTime.MaxValue;
+    [ObservableProperty] ObservableCollection<string> logTypeList=new();
+    [ObservableProperty]public string selectedLogType;
 
-    [ObservableProperty]
-    public TimeSpan selectedTime;
+    [ObservableProperty]public string number; 
 
-    [ObservableProperty]
-	public string dateAndTime;
+	[ObservableProperty]public string description;
 
-    [ObservableProperty]
-    ObservableCollection<string> logTypeList=new();
-
-    [ObservableProperty]
-    public string selectedLogType;
-
-    [ObservableProperty]
-	public string number; 
-
-	[ObservableProperty]
-	public string description;
-
-	[ObservableProperty]
-	public string newLogEntryStatusMessage;
-
-    [ObservableProperty]
-    public string removeLogEntryStatusMessage;
+	[ObservableProperty]public string newLogEntryStatusMessage;
+    [ObservableProperty] public string removeLogEntryStatusMessage;
     public ObservableCollection<LogEntry> Logs { get; set; } = new();
-
-	[ObservableProperty]
-	public LogEntry selectedLog;
+	[ObservableProperty]public LogEntry selectedLog;
 
     public MainPageViewModel()
 	{
@@ -87,7 +72,7 @@ public partial class MainPageViewModel : ObservableObject
 	{
 		try
 		{
-			DateAndTime = SelectedDate.ToLongDateString() + "/" + SelectedTime;
+			DateAndTime = SelectedDate.ToString("MM/dd/yyy") + "/" + SelectedTime;
             LogEntryRepo.AddLogEntry(DateAndTime, Number, Description);
 			DateAndTime = "";
 			NewLogEntryStatusMessage = "Success: Log Added.";
@@ -110,8 +95,10 @@ public partial class MainPageViewModel : ObservableObject
 		int LogId;
 		if(SelectedLog==null)
 		{
-			NewLogEntryStatusMessage = "Error: Select a Log Entry.";
-			return;
+            NewLogEntryStatusMessage = "Error: Failed To Remove Log. ";
+            await Task.Delay(2000);
+            NewLogEntryStatusMessage = "";
+            return;
         }
         LogId = SelectedLog.Log_entry_id;
         try
@@ -126,6 +113,12 @@ public partial class MainPageViewModel : ObservableObject
             NewLogEntryStatusMessage = "";
         }
     }
+
+	[RelayCommand]
+	public void UpdateLogEntry()
+	{
+
+	}
 
 	[RelayCommand]
 	public void PoulateLogEntriesList()

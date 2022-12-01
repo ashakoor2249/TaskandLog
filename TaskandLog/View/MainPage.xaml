@@ -5,7 +5,7 @@
              xmlns:tables="clr-namespace:TaskandLog.Tables"
              x:DataType="viewmodel:MainPageViewModel"
              x:Class="TaskandLog.MainPage"
-             BackgroundColor="LightGreen">
+             BackgroundColor="MediumPurple">
 
     <Grid RowDefinitions="100, 100, 100,100" Padding="10" RowSpacing="10" ColumnSpacing="10">
 
@@ -13,6 +13,7 @@
 
             <Button Command="{Binding AddLogEntryCommand}" Text="Add Log" HeightRequest="50"/>
             <Button Command="{Binding RemoveLogEntryCommand}" Text="Remove Log" HeightRequest="50"/>
+            <Button Clicked="Button_Clicked" Text="Update Log" HeightRequest="50"/>
             <Button Command="{Binding EmailLogEntriesCommand}" Text="Email Log" HeightRequest="50"/>
             <Button Command="{Binding ClearLogInputsCommand}" Text="Clear Log Inputs" HeightRequest="50"/>
             <Image Source="log_logo.png" BackgroundColor="Transparent"/>
