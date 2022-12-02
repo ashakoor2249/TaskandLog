@@ -9,7 +9,8 @@
 
     <TabBar>
         <ShellContent Title="Passdown Log" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
-        <ShellContent Title="Task Assignment" ContentTemplate="{DataTemplate view:TaskAssignment}" Route="Task Assignment" />
+        <ShellContent Title="Task Assignment" ContentTemplate="{DataTemplate view:TaskAssignment}" Route="TaskAssignment" />
+        <ShellContent Title="Database" ContentTemplate="{DataTemplate view:DatabasePage}" Route="DatabasePage" />
     </TabBar>
 
 </Shell>

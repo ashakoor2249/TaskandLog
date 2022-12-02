@@ -15,7 +15,7 @@
             <Button Command="{Binding RemoveLogEntryCommand}" Text="Remove Log" HeightRequest="50"/>
             <Button Clicked="Button_Clicked" Text="Update Log" HeightRequest="50"/>
             <Button Command="{Binding EmailLogEntriesCommand}" Text="Email Log" HeightRequest="50"/>
-            <Button Command="{Binding ClearLogInputsCommand}" Text="Clear Log Inputs" HeightRequest="50"/>
+            <Button Clicked="Button_Clicked_EmailPassdownLog" Text="Clear Log Inputs" HeightRequest="50"/>
             <Image Source="log_logo.png" BackgroundColor="Transparent"/>
 
      
@@ -44,13 +44,26 @@
 
             <VerticalStackLayout>
                 
+                <Label FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" 
+                       TextColor="Black" Text="Select Date"></Label>
+
                 <DatePicker MinimumDate="{Binding MinDate}" MaximumDate="{Binding MaxDate}" 
                             Date="{Binding SelectedDate}" />
-                
+
+
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+
+                <Label FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" 
+                       TextColor="Black" Text="Select Time"></Label>
+
                 <TimePicker Time="{Binding SelectedTime}" />
                 
             </VerticalStackLayout>
-     
+              
+               
+                
             <VerticalStackLayout>
 
                 <Label FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16" 

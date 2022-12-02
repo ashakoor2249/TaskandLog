@@ -1,4 +1,5 @@
-﻿using TaskandLog.ViewModel;
+﻿using TaskandLog.View;
+using TaskandLog.ViewModel;
 
 namespace TaskandLog;
 
@@ -19,8 +20,8 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddSingleton<MainPageViewModel>();
-
-
+		builder.Services.AddSingleton<DatabasePage>();
+		builder.Services.AddSingleton<DatabasePageViewModel>();
 		return builder.Build();
 	}
 }

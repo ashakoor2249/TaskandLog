@@ -5,6 +5,8 @@ using TaskandLog.Database;
 using TaskandLog.TableRepositories;
 using TaskandLog.Tables;
 
+
+
 namespace TaskandLog.ViewModel;
 
 public partial class MainPageViewModel : ObservableObject
@@ -101,6 +103,10 @@ public partial class MainPageViewModel : ObservableObject
             return;
         }
         LogId = SelectedLog.Log_entry_id;
+		if(LogId==1)
+		{
+			return;
+		}
         try
 		{
             LogEntryRepo.DeleteLogEntry(LogId);
@@ -114,11 +120,6 @@ public partial class MainPageViewModel : ObservableObject
         }
     }
 
-	[RelayCommand]
-	public void UpdateLogEntry()
-	{
-
-	}
 
 	[RelayCommand]
 	public void PoulateLogEntriesList()
