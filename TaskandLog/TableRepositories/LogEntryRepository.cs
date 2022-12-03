@@ -53,8 +53,8 @@ namespace TaskandLog.TableRepositories
 		public List<LogEntry> GetLogEntries()
 		{
 			Init();
-            LogEntries = Database.DatabaseConnection.Table<LogEntry>().ToList();
-			return LogEntries;
+            return Database.DatabaseConnection.Table<LogEntry>().ToList();
+			
 		}
 	}
 }

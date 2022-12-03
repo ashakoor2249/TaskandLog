@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ public partial class DatabasePageViewModel: ObservableObject
     [ObservableProperty] public string removeType;
     [ObservableProperty] public string newTypeStatusMessage;
     [ObservableProperty] public string removeTypeStatusMessage;
+    [ObservableProperty] public ObservableCollection<string> typeList;
 
     public DatabasePageViewModel() 
     { 

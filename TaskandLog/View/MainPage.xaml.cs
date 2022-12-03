@@ -12,6 +12,8 @@ public partial class MainPage : ContentPage
     readonly Methods methods = new ();
 	readonly LogEntryRepository LogEntryRepo = new();
     public List<LogEntry> LogEntries = new();
+    public LogEmailDistributionRepository LogEmailDistributionRepo= new();
+    public List<LogEmailDistribution> LogEmailDistributionList = new();
     public string UpdateDate { get; set;}
 	public string UpdateType { get; set; }
 	public string UpdateDescription { get; set; }
@@ -19,12 +21,13 @@ public partial class MainPage : ContentPage
 
     public Outlook.Application ObjApp = new();
     public Outlook.MailItem Mail { get; set; } = null;
+
+    public string PassdownLogTemplate { get; set; } = Path.Combine(FileSystem.AppDataDirectory, "PassdownLogTemplate.msg");
     public string To { get; set; }
     public string Cc { get; set; }
     public string Subject { get; set; }
     public string Body { get; set; }
-
-    public string PassdownLogTemplate { get; set; } = Path.Combine(FileSystem.AppDataDirectory, "PassdownLogTemplate.msg");
+    
 
     public MainPage(MainPageViewModel MainPageViewModel)
 	{
@@ -43,7 +46,7 @@ public partial class MainPage : ContentPage
         }
 	}
 
-    private async void Button_Clicked(object sender, EventArgs e)
+    private async void RemoveButton_Clicked(object sender, EventArgs e)
     {
 
 		if(selectLog.SelectedItem != null)
@@ -78,10 +81,32 @@ public partial class MainPage : ContentPage
 
     private void Button_Clicked_EmailPassdownLog(object sender, EventArgs e)
     {
+        LogEmailDistributionList = LogEmailDistributionRepo.GetLogEmailDistribution();
+        foreach (LogEmailDistribution logEmailDistribution in LogEmailDistributionList)
+        {
+            To = logEmailDistribution.Log_email_distribution_to;
+        }
+        Subject = "SunWatch Passdown Log Email Notification";
+
+        LogEntries=LogEntryRepo.GetLogEntries();
+        Body = "<font size=4> Team, " + "<br>" + "<br>" + " Below are the current active items on the Passdown Log: "+ "<br>"+"<br>";
+        foreach (var logEntry in LogEntries)
+        {
+            if(logEntry.Log_entry_id!=1)
+            {
+                Body += logEntry.Log_entry_id + " - " + logEntry.Log_entry_date_time + " - " + logEntry.Log_entry_type + " - " + logEntry.Log_entry_description + "<br>";
+            }
+            
+        }
 
         try
         {
             Mail = (Outlook.MailItem)ObjApp.CreateItemFromTemplate(PassdownLogTemplate);
+            Mail.To = To;
+            Mail.Subject = Subject;
+            Mail.HTMLBody= Body;
+            Mail.Display();
+            Mail = null;
         }
         catch (Exception ex)
         {
