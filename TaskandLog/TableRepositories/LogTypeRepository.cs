@@ -49,6 +49,7 @@ namespace TaskandLog.TableRepositories
 			Init();
 			return Database.DatabaseConnection.Table<LogType>().ToList();
 		}
+
 	}
 
 }

@@ -1,9 +1,18 @@
+using TaskandLog.ViewModel;
+using System;
+
+
 namespace TaskandLog.View;
 
 public partial class TaskAssignment : ContentPage
 {
-	public TaskAssignment()
+
+    public TaskAssignment(TaskAssignmentViewModel taskAssignmentViewModel)
 	{
-		InitializeComponent();
-	}
+     
+        InitializeComponent();
+        BindingContext = taskAssignmentViewModel;
+    }
+
+  
 }

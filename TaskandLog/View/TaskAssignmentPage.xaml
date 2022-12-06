@@ -2,12 +2,95 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TaskandLog.View.TaskAssignment"
-             Title="TaskAssignment"
+             xmlns:viewmodel="clr-namespace:TaskandLog.ViewModel"
+             x:DataType="viewmodel:TaskAssignmentViewModel"
+             Title="Task Assignment"
              BackgroundColor="MediumPurple">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+
+
+    <ScrollView HorizontalOptions="Center" Orientation="Both" HorizontalScrollBarVisibility="Always" VerticalScrollBarVisibility="Always">
+
+        <Grid VerticalOptions="Center" HorizontalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"></RowDefinition>
+                <RowDefinition Height="200"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+
+          
+            <BoxView Color="DarkGray" Grid.RowSpan="2" Grid.ColumnSpan="4"></BoxView>
+            <BoxView Grid.Row="2" Color="PaleGoldenrod" />
+            <BoxView Grid.Row="2" Grid.Column="1" Color="PaleGoldenrod" />
+            <BoxView Grid.Row="2" Grid.Column="2" Color="PaleGoldenrod" />
+            <BoxView Grid.Row="2" Grid.Column="3" Color="PaleGoldenrod" />
+
+            <BoxView Grid.Row="3" Color="PaleGreen" />
+            <BoxView Grid.Row="4" Color="PaleGreen" />
+            <BoxView Grid.Row="5" Color="PaleGreen" />
+            <BoxView Grid.Row="6" Color="PaleGreen" />
+
+            <BoxView Grid.Row="3" Grid.Column="1" Color="Gold"></BoxView>
+            <BoxView Grid.Row="3" Grid.Column="2" Color="White"></BoxView>
+            <BoxView Grid.Row="3" Grid.Column="3" Color="Gold"></BoxView>
+
+            <BoxView Grid.Row="4" Grid.Column="1" Color="White"></BoxView>
+            <BoxView Grid.Row="4" Grid.Column="2" Color="Gold"></BoxView>
+            <BoxView Grid.Row="4" Grid.Column="3" Color="White"></BoxView>
+
+            <BoxView Grid.Row="5" Grid.Column="1" Color="Gold"></BoxView>
+            <BoxView Grid.Row="5" Grid.Column="2" Color="White"></BoxView>
+            <BoxView Grid.Row="5" Grid.Column="3" Color="Gold"></BoxView>
+
+            <BoxView Grid.Row="6" Grid.Column="1" Color="White"></BoxView>
+            <BoxView Grid.Row="6" Grid.Column="2" Color="Gold"></BoxView>
+            <BoxView Grid.Row="6" Grid.Column="3" Color="White"></BoxView>
+
+
+            <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="0" Spacing="30" Padding="30">
+
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Spacing="30" Padding="30">
+                    <Picker ItemsSource="{Binding SunWatchPersonaleList}" SelectedItem="{Binding SelectedSunWatchPersonale}" Title="Employee" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Center"></Picker>
+                    <Picker ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}"  Title="Assignment" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Center"></Picker>
+                    <Picker ItemsSource="{Binding DayList}" SelectedItem="{Binding SelectedDay}"  Title="Day" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Center"></Picker>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Spacing="30" Padding="30">
+                    <Button Command="{Binding AddAssignedTaskCommand}" Text="Add Assignment" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Button Text="Update Assignment" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Button Text="Delete Assignment" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </VerticalStackLayout>
+                
+                <DatePicker Date="{Binding TodaysDate}" MinimumDate="{Binding MinDate}" MaximumDate="{Binding MaxDate}" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16"></DatePicker>
+                
+
+            </HorizontalStackLayout>
+
+            <Label Grid.Row="2" Text="Tasks" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="2" Grid.Column="1" Text="1st Shift" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="2" Grid.Column="2" Text="2nd Shift" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="2" Grid.Column="3" Text="3rd Shift" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+
+            <Label Grid.Row="3" Text="Email/Orion" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="4" Text="MOMS/MCC" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="5" Text="SCADA" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="6" Text="P2000" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            
+        </Grid>
+      
+     
+    </ScrollView>
+
+
 </ContentPage>

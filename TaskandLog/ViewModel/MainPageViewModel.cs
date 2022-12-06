@@ -29,12 +29,10 @@ public partial class MainPageViewModel : ObservableObject
     [ObservableProperty]public string dateAndTime;
 
     [ObservableProperty] ObservableCollection<string> logTypeList=new();
+
     [ObservableProperty]public string selectedLogType;
-
     [ObservableProperty]public string number; 
-
 	[ObservableProperty]public string description;
-
 	[ObservableProperty]public string newLogEntryStatusMessage;
     [ObservableProperty] public string removeLogEntryStatusMessage;
     public ObservableCollection<LogEntry> Logs { get; set; } = new();
@@ -46,6 +44,7 @@ public partial class MainPageViewModel : ObservableObject
 		{
             Database.DatabaseInit();
         }
+
 		PopulateTypeList();
 		PoulateLogEntriesList();
 	}
@@ -139,14 +138,9 @@ public partial class MainPageViewModel : ObservableObject
 		}
     }
 
-	[RelayCommand]
-	async void EmailLogEntries()
-	{
-	
-	}
 
 	[RelayCommand]
-	public void ClearLogInputs()
+	public void ClearInputs()
 	{
         logTypeList?.Clear();
 		PopulateTypeList();

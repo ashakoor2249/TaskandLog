@@ -46,9 +46,12 @@
 
             </HorizontalStackLayout>
 
-            <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" Padding="10">
 
-                <Frame VerticalOptions="Center" HorizontalOptions="Center" BorderColor="SandyBrown" HasShadow="True">
+            <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" 
+             Padding="10">
+                
+            
+            <Frame VerticalOptions="Center" HorizontalOptions="Center" BorderColor="SandyBrown" HasShadow="True">
 
                     <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" Padding="10">
 
@@ -66,14 +69,180 @@
 
                 <Frame VerticalOptions="Center" HorizontalOptions="Center" BorderColor="SandyBrown" HasShadow="True">
 
-                    <ListView ItemsSource="{Binding TypeList}" VerticalOptions="Center" 
+                    <ListView ItemsSource="{Binding LogTypeList}" VerticalOptions="Center" 
                      HorizontalOptions="Center" WidthRequest="200" HeightRequest="100" 
                      VerticalScrollBarVisibility="Always" >
 
                         <ListView.Header>
                             <Label TextColor="Black" FontSize="20" FontFamily="ArialBlack" 
                              FontAttributes="Bold" FontAutoScalingEnabled="True" Margin="10,0,0,0" 
-                             HorizontalOptions="Center" Text="Region List"/>
+                             HorizontalOptions="Center" Text="Type List"/>
+                        </ListView.Header>
+
+                    </ListView>
+
+                </Frame>
+            </HorizontalStackLayout>
+            
+
+                <Label Text="----------TYPE SECTION END----------" FontSize="24" FontFamily="ArialBlack" 
+             FontAttributes="Bold" Padding="10" HorizontalOptions="Center"></Label>
+
+                <Label Text="----------SUNWATCH PERSONALE START---------" FontSize="24" FontFamily="ArialBlack" 
+             FontAttributes="Bold" Padding="10" HorizontalOptions="Center"></Label>
+
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Padding="10">
+
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" 
+                 Padding="10">
+
+                        <Entry Text="{Binding NewSunWatchPersonaleName}" FontSize="20" FontFamily="ArialBlack" 
+                     FontAttributes="Bold" Placeholder="Enter Personale Name"/>
+
+                        <Entry Text="{Binding NewSunWatchPersonaleShift}" FontSize="20" FontFamily="ArialBlack" 
+                     FontAttributes="Bold" Placeholder="Enter Personale Shift"/>
+
+                        <Entry Text="{Binding NewSunWatchPersonaleDaysWorked}" FontSize="20" FontFamily="ArialBlack" 
+                     FontAttributes="Bold" Placeholder="Enter Personale Days Worked"/>
+
+                    <Button Command="{Binding AddNewSunWatchPersonaleCommand}" FontSize="20" FontFamily="ArialBlack" 
+                     FontAttributes="Bold" Text="Add Personale"/>
+
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" 
+                 Padding="10">
+
+                        <Entry  Text="{Binding RemoveSunWatchPersonale}" FontSize="20" FontFamily="ArialBlack" 
+                     FontAttributes="Bold" Placeholder="Enter Personale ID" />
+
+                        <Button Command="{Binding DeleteSunWatchPersonaleCommand}" FontSize="20" FontFamily="ArialBlack" 
+                     FontAttributes="Bold" Text="Delete Personale"/>
+
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" 
+                 Padding="10">
+
+                        <Button Command="{Binding GetAllSunWatchPersonaleCommand}" FontSize="20" 
+                     FontFamily="ArialBlack" FontAttributes="Bold" Text="Get All Personale"/>
+
+                    </VerticalStackLayout>
+
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" 
+             Padding="10">
+
+                    <Frame VerticalOptions="Center" HorizontalOptions="Center" HasShadow="True" 
+                 BorderColor="SandyBrown">
+
+                        <VerticalStackLayout HorizontalOptions="Center" Spacing="10" Padding="10">
+
+                            <Label Text="{Binding NewSunWatchPersonaleStatusMessage}" TextColor="Black" 
+                         FontSize="20" FontFamily="ArialBlack" FontAttributes="Bold" VerticalOptions="Center" 
+                         HorizontalOptions="Center" WidthRequest="200"></Label>
+
+                            <Label Text="{Binding RemoveSunWatchPersonaleStatusMessage}" TextColor="Black" 
+                         FontSize="20" FontFamily="ArialBlack" FontAttributes="Bold" VerticalOptions="Center" 
+                         HorizontalOptions="Center" WidthRequest="200"></Label>
+
+                        </VerticalStackLayout>
+
+                    </Frame>
+
+                    <Frame VerticalOptions="Center" HorizontalOptions="Center" HasShadow="True" 
+                 BorderColor="SandyBrown">
+
+                        <ListView ItemsSource="{Binding SunWatchPersonaleList}" VerticalOptions="Center" 
+                     HorizontalOptions="Center" WidthRequest="300" HeightRequest="100" 
+                     VerticalScrollBarVisibility="Always">
+
+                            <ListView.Header>
+                                <Label HorizontalOptions="Center" TextColor="Black" FontSize="20" 
+                             FontFamily="ArialBlack" FontAttributes="Bold" FontAutoScalingEnabled="True" 
+                             Margin="10,0,0,0" Text="Personale List">
+                                </Label>
+                            </ListView.Header>
+
+                        </ListView>
+
+                    </Frame>
+
+                </HorizontalStackLayout>
+
+                <Label Text="----------PERSONALE END----------" FontSize="24" FontFamily="ArialBlack" 
+             FontAttributes="Bold" Padding="10" HorizontalOptions="Center"></Label>
+
+            <Label Text="----------ASSIGNMENT START----------" FontSize="24" FontFamily="ArialBlack" 
+             FontAttributes="Bold" Padding="10" HorizontalOptions="Center"></Label>
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Padding="10">
+
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" 
+                 Padding="10">
+
+                    <Entry Text="{Binding NewTask}" FontSize="20" FontFamily="ArialBlack" 
+                     FontAttributes="Bold" Placeholder="Enter Assignment Name"/>
+
+                    <Button Command="{Binding AddNewTaskCommand}" FontSize="20" FontFamily="ArialBlack" 
+                     FontAttributes="Bold" Text="Add Assignment"/>
+
+                </VerticalStackLayout>
+
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" 
+                 Padding="10">
+
+                    <Entry  Text="{Binding RemoveTask}" FontSize="20" FontFamily="ArialBlack" 
+                     FontAttributes="Bold" Placeholder="Enter Assignment ID" />
+
+                    <Button Command="{Binding DeleteTaskCommand}" FontSize="20" FontFamily="ArialBlack" 
+                     FontAttributes="Bold" Text="Delete Assignment"/>
+
+                </VerticalStackLayout>
+
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" 
+                 Padding="10">
+
+                    <Button Command="{Binding GetAllTasksCommand}" FontSize="20" 
+                     FontFamily="ArialBlack" FontAttributes="Bold" Text="Get All Assignments"/>
+
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" 
+             Padding="10">
+
+                <Frame VerticalOptions="Center" HorizontalOptions="Center" HasShadow="True" 
+                 BorderColor="SandyBrown">
+
+                    <VerticalStackLayout HorizontalOptions="Center" Spacing="10" Padding="10">
+
+                        <Label Text="{Binding NewTaskStatusMesssage}" TextColor="Black" 
+                         FontSize="20" FontFamily="ArialBlack" FontAttributes="Bold" VerticalOptions="Center" 
+                         HorizontalOptions="Center" WidthRequest="200"></Label>
+
+                        <Label Text="{Binding RemoveTaskStatusMessage}" TextColor="Black" 
+                         FontSize="20" FontFamily="ArialBlack" FontAttributes="Bold" VerticalOptions="Center" 
+                         HorizontalOptions="Center" WidthRequest="200"></Label>
+
+                    </VerticalStackLayout>
+
+                </Frame>
+
+                <Frame VerticalOptions="Center" HorizontalOptions="Center" HasShadow="True" 
+                 BorderColor="SandyBrown">
+
+                    <ListView ItemsSource="{Binding TaskList}" VerticalOptions="Center" 
+                     HorizontalOptions="Center" WidthRequest="300" HeightRequest="100" 
+                     VerticalScrollBarVisibility="Always">
+
+                        <ListView.Header>
+                            <Label HorizontalOptions="Center" TextColor="Black" FontSize="20" 
+                             FontFamily="ArialBlack" FontAttributes="Bold" FontAutoScalingEnabled="True" 
+                             Margin="10,0,0,0" Text="Assignment List">
+                            </Label>
                         </ListView.Header>
 
                     </ListView>
@@ -81,6 +250,10 @@
                 </Frame>
 
             </HorizontalStackLayout>
+
+            <Label Text="----------ASSIGNMENT END----------" FontSize="24" FontFamily="ArialBlack" 
+             FontAttributes="Bold" Padding="10" HorizontalOptions="Center"></Label>
+
 
         </VerticalStackLayout>
 
