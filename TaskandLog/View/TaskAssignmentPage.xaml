@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TaskandLog.View.TaskAssignment"
              xmlns:viewmodel="clr-namespace:TaskandLog.ViewModel"
+              xmlns:tables="clr-namespace:TaskandLog.Tables"
              x:DataType="viewmodel:TaskAssignmentViewModel"
              Title="Task Assignment"
              BackgroundColor="MediumPurple">
@@ -26,66 +27,124 @@
                 <ColumnDefinition Width="200"></ColumnDefinition>
                 <ColumnDefinition Width="200"></ColumnDefinition>
                 <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
 
           
-            <BoxView Color="DarkGray" Grid.RowSpan="2" Grid.ColumnSpan="4"></BoxView>
-            <BoxView Grid.Row="2" Color="PaleGoldenrod" />
+            <BoxView Color="DarkGray" Grid.RowSpan="2" Grid.ColumnSpan="6"></BoxView>
+            <BoxView Color="DarkGray" Grid.Row="2"></BoxView>
             <BoxView Grid.Row="2" Grid.Column="1" Color="PaleGoldenrod" />
             <BoxView Grid.Row="2" Grid.Column="2" Color="PaleGoldenrod" />
             <BoxView Grid.Row="2" Grid.Column="3" Color="PaleGoldenrod" />
-
-            <BoxView Grid.Row="3" Color="PaleGreen" />
-            <BoxView Grid.Row="4" Color="PaleGreen" />
-            <BoxView Grid.Row="5" Color="PaleGreen" />
-            <BoxView Grid.Row="6" Color="PaleGreen" />
-
-            <BoxView Grid.Row="3" Grid.Column="1" Color="Gold"></BoxView>
-            <BoxView Grid.Row="3" Grid.Column="2" Color="White"></BoxView>
-            <BoxView Grid.Row="3" Grid.Column="3" Color="Gold"></BoxView>
-
-            <BoxView Grid.Row="4" Grid.Column="1" Color="White"></BoxView>
-            <BoxView Grid.Row="4" Grid.Column="2" Color="Gold"></BoxView>
-            <BoxView Grid.Row="4" Grid.Column="3" Color="White"></BoxView>
-
-            <BoxView Grid.Row="5" Grid.Column="1" Color="Gold"></BoxView>
-            <BoxView Grid.Row="5" Grid.Column="2" Color="White"></BoxView>
-            <BoxView Grid.Row="5" Grid.Column="3" Color="Gold"></BoxView>
-
-            <BoxView Grid.Row="6" Grid.Column="1" Color="White"></BoxView>
-            <BoxView Grid.Row="6" Grid.Column="2" Color="Gold"></BoxView>
-            <BoxView Grid.Row="6" Grid.Column="3" Color="White"></BoxView>
+            <BoxView Grid.Row="2" Grid.Column="4" Color="PaleGoldenrod" />
 
 
-            <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="0" Spacing="30" Padding="30">
+            <BoxView Grid.Row="3" Grid.Column="1" Color="PaleGreen" />
+            <BoxView Grid.Row="4" Grid.Column="1" Color="PaleGreen" />
+            <BoxView Grid.Row="5" Grid.Column="1" Color="PaleGreen" />
+            <BoxView Grid.Row="6" Grid.Column="1" Color="PaleGreen" />
 
-                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Spacing="30" Padding="30">
-                    <Picker ItemsSource="{Binding SunWatchPersonaleList}" SelectedItem="{Binding SelectedSunWatchPersonale}" Title="Employee" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Center"></Picker>
-                    <Picker ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}"  Title="Assignment" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Center"></Picker>
-                    <Picker ItemsSource="{Binding DayList}" SelectedItem="{Binding SelectedDay}"  Title="Day" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Center"></Picker>
+            <BoxView Grid.Row="2" Grid.Column="5" Color="DarkGray" />
+            <BoxView Grid.Row="3" Grid.Column="5" Color="DarkGray" />
+            <BoxView Grid.Row="4" Grid.Column="5" Color="DarkGray" />
+            <BoxView Grid.Row="5" Grid.Column="5" Color="DarkGray" />
+            <BoxView Grid.Row="6" Grid.Column="5" Color="DarkGray" />
+
+            <BoxView Color="DarkGray" Grid.Row="2"></BoxView>
+            <BoxView Color="DarkGray" Grid.Row="3"></BoxView>
+            <BoxView Color="DarkGray" Grid.Row="4"></BoxView>
+            <BoxView Color="DarkGray" Grid.Row="5"></BoxView>
+            <BoxView Color="DarkGray" Grid.Row="6"></BoxView>
+
+            <BoxView Grid.Row="3" Grid.Column="2" Color="Gold"></BoxView>
+            <BoxView Grid.Row="3" Grid.Column="3" Color="White"></BoxView>
+            <BoxView Grid.Row="3" Grid.Column="4" Color="Gold"></BoxView>
+
+            <BoxView Grid.Row="4" Grid.Column="2" Color="White"></BoxView>
+            <BoxView Grid.Row="4" Grid.Column="3" Color="Gold"></BoxView>
+            <BoxView Grid.Row="4" Grid.Column="4" Color="White"></BoxView>
+
+            <BoxView Grid.Row="5" Grid.Column="2" Color="Gold"></BoxView>
+            <BoxView Grid.Row="5" Grid.Column="3" Color="White"></BoxView>
+            <BoxView Grid.Row="5" Grid.Column="4" Color="Gold"></BoxView>
+
+            <BoxView Grid.Row="6" Grid.Column="2" Color="White"></BoxView>
+            <BoxView Grid.Row="6" Grid.Column="3" Color="Gold"></BoxView>
+            <BoxView Grid.Row="6" Grid.Column="4" Color="White"></BoxView>
+
+
+            <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="0" Spacing="25">
+
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="60">
+
+                    <Picker ItemsSource="{Binding SunWatchPersonaleList}" SelectedItem="{Binding SelectedSunWatchPersonale}" Title="Employee" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" WidthRequest="400" HorizontalOptions="Center" VerticalOptions="Center"></Picker>
+                    <Picker ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}"  Title="Assignment" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" WidthRequest="400" HorizontalOptions="Center" VerticalOptions="Center"></Picker>
+                    <Picker ItemsSource="{Binding DayList}" SelectedItem="{Binding SelectedDay}"  Title="Day" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" WidthRequest="400" HorizontalOptions="Start" VerticalOptions="Start"></Picker>
+
                 </VerticalStackLayout>
 
-                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Spacing="30" Padding="30">
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Spacing="60" >
+
                     <Button Command="{Binding AddAssignedTaskCommand}" Text="Add Assignment" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <Button Text="Update Assignment" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <Button Text="Delete Assignment" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Button Command="{Binding RemoveAssignedTaskCommand}" Text="Delete Assignment" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Button Clicked="UpdateAssignment_ButtonClicked" Text="Update Assignment" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <DatePicker Date="{Binding TodaysDate}" MinimumDate="{Binding MinDate}" MaximumDate="{Binding MaxDate}" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16"></DatePicker>
+                    
                 </VerticalStackLayout>
-                
-                <DatePicker Date="{Binding TodaysDate}" MinimumDate="{Binding MinDate}" MaximumDate="{Binding MaxDate}" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16"></DatePicker>
-                
 
+                    <CollectionView ItemsSource="{Binding AssignedTaskList}" SelectedItem="{Binding SelectedAssignedTask}" x:Name="selectAssignedTask" VerticalScrollBarVisibility="Always" 
+                        HorizontalScrollBarVisibility="Always" SelectionMode="Single">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="tables:AssignedTask">
+                                <Grid Padding="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="80" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="150" />
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <Label Grid.Row="1" Text="{Binding Assigned_task_id}" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="14" 
+                               HorizontalOptions="Start"/>
+
+                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding Assigned_task_sunwatch_personale_name}" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="14" 
+                               HorizontalOptions="Start"/>
+
+                                    <Label Grid.Row="1" Grid.Column="2" Text="{Binding Assigned_task_name}" FontAttributes="Bold" 
+                               FontFamily="ArialBlack" FontSize="14" HorizontalOptions="Center"/>
+
+                                    <Label Grid.Row="1" Grid.Column="3" Text="{Binding Assigned_task_day}" FontAttributes="Bold" 
+                               FontFamily="ArialBlack" FontSize="14" HorizontalOptions="Start"/>
+
+
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+
+               
+                
+        
+                
             </HorizontalStackLayout>
 
-            <Label Grid.Row="2" Text="Tasks" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
-            <Label Grid.Row="2" Grid.Column="1" Text="1st Shift" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
-            <Label Grid.Row="2" Grid.Column="2" Text="2nd Shift" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
-            <Label Grid.Row="2" Grid.Column="3" Text="3rd Shift" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="2" Grid.Column="1" Text="Tasks" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="2" Grid.Column="2" Text="1st Shift" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="2" Grid.Column="3" Text="2nd Shift" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="2" Grid.Column="4" Text="3rd Shift" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
 
-            <Label Grid.Row="3" Text="Email/Orion" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
-            <Label Grid.Row="4" Text="MOMS/MCC" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
-            <Label Grid.Row="5" Text="SCADA" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
-            <Label Grid.Row="6" Text="P2000" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="3" Grid.Column="1" Text="Email/Orion" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="4" Grid.Column="1" Text="MOMS/MCC" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="5" Grid.Column="1" Text="SCADA" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="6" Grid.Column="1" Text="P2000" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
             
         </Grid>
       

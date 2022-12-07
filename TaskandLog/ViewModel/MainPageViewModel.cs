@@ -17,26 +17,27 @@ public partial class MainPageViewModel : ObservableObject
     public List<LogType> LogTypes = new();
     public List<LogEntry> LogEntries = new();
 
-    [ObservableProperty]public int updatedLogEntryId;
+    [ObservableProperty] public int updatedLogEntryId;
 	[ObservableProperty] public string updatedLogEntryDateAndTime;
 	[ObservableProperty] public string updatedLogEntryNumber;
     [ObservableProperty] public string updatedLogEntryDescription;
+    [ObservableProperty] public string dateAndTime;
+    [ObservableProperty] public string selectedLogType;
+    [ObservableProperty] public string number;
+    [ObservableProperty] public string description;
+    [ObservableProperty] public string logEntryStatusMessage;
 
-    [ObservableProperty]public DateTime selectedDate=DateTime.Today;
-	[ObservableProperty]public DateTime minDate=DateTime.Today;
-	[ObservableProperty]public DateTime maxDate=DateTime.MaxValue;
-    [ObservableProperty]public TimeSpan selectedTime;
-    [ObservableProperty]public string dateAndTime;
+    [ObservableProperty] public DateTime selectedDate=DateTime.Today;
+	[ObservableProperty] public DateTime minDate=DateTime.Today;
+	[ObservableProperty] public DateTime maxDate=DateTime.MaxValue;
+    [ObservableProperty] public TimeSpan selectedTime;
+   
 
     [ObservableProperty] ObservableCollection<string> logTypeList=new();
 
-    [ObservableProperty]public string selectedLogType;
-    [ObservableProperty]public string number; 
-	[ObservableProperty]public string description;
-	[ObservableProperty]public string newLogEntryStatusMessage;
-    [ObservableProperty] public string removeLogEntryStatusMessage;
     public ObservableCollection<LogEntry> Logs { get; set; } = new();
-	[ObservableProperty]public LogEntry selectedLog;
+
+	[ObservableProperty] public LogEntry selectedLog;
 
     public MainPageViewModel()
 	{
@@ -62,9 +63,9 @@ public partial class MainPageViewModel : ObservableObject
 
 		catch (Exception ex)
 		{
-			NewLogEntryStatusMessage = "Error: Failed To Add Log. " + ex.Message;
+			LogEntryStatusMessage = "Error: Failed To Add Log. " + ex.Message;
 			await Task.Delay(2000);
-			NewLogEntryStatusMessage = "";
+			LogEntryStatusMessage = "";
 		}
 	}
 
@@ -76,17 +77,17 @@ public partial class MainPageViewModel : ObservableObject
 			DateAndTime = SelectedDate.ToString("MM/dd/yyy") + "/" + SelectedTime;
             LogEntryRepo.AddLogEntry(DateAndTime, Number, Description);
 			DateAndTime = "";
-			NewLogEntryStatusMessage = "Success: Log Added.";
+			LogEntryStatusMessage = "Success: Log Added.";
 			await Task.Delay(2000);
-			NewLogEntryStatusMessage = "";
+			LogEntryStatusMessage = "";
             PoulateLogEntriesList();
         }
 
 		catch (Exception ex)
 		{
-			NewLogEntryStatusMessage = "Error: Failed To Add Log. " + ex.Message;
+			LogEntryStatusMessage = "Error: Failed To Add Log. " + ex.Message;
 			await Task.Delay(2000);
-			NewLogEntryStatusMessage = "";
+			LogEntryStatusMessage = "";
 		}
 	}
 
@@ -96,27 +97,36 @@ public partial class MainPageViewModel : ObservableObject
 		int LogId;
 		if(SelectedLog==null)
 		{
-            NewLogEntryStatusMessage = "Error: Failed To Remove Log. ";
+            LogEntryStatusMessage = "Error: Failed To Remove Log.";
             await Task.Delay(2000);
-            NewLogEntryStatusMessage = "";
+            LogEntryStatusMessage = "";
             return;
         }
-        LogId = SelectedLog.Log_entry_id;
+
+		else
+		{
+            LogId = SelectedLog.Log_entry_id;
+        }
+        
 		if(LogId==1)
 		{
 			return;
 		}
-        try
+		else
 		{
-            LogEntryRepo.DeleteLogEntry(LogId);
-            PoulateLogEntriesList();
+            try
+            {
+                LogEntryRepo.DeleteLogEntry(LogId);
+                PoulateLogEntriesList();
+            }
+            catch (Exception ex)
+            {
+                LogEntryStatusMessage = "Error: Failed To Remove Log. " + ex.Message;
+                await Task.Delay(2000);
+                LogEntryStatusMessage = "";
+            }
         }
-		catch (Exception ex)
-		{
-            NewLogEntryStatusMessage = "Error: Failed To Remove Log. " + ex.Message;
-            await Task.Delay(2000);
-            NewLogEntryStatusMessage = "";
-        }
+      
     }
 
 

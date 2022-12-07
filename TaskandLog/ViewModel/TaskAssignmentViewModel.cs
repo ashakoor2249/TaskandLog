@@ -28,15 +28,24 @@ public partial class TaskAssignmentViewModel : ObservableObject
     [ObservableProperty] public DateTime minDate = DateTime.Today;
     [ObservableProperty] public DateTime maxDate = DateTime.MaxValue;
 
-
     [ObservableProperty] public string selectedSunWatchPersonale;
     [ObservableProperty] public string selectedTask;
     [ObservableProperty] public string selectedDay;
+    [ObservableProperty] public string assignedTaskStatusMessage;
 
-    [ObservableProperty] ObservableCollection<string> sunWatchPersonaleList = new();
-    [ObservableProperty] ObservableCollection<string> taskList = new();
-    [ObservableProperty] ObservableCollection<string> assignedTaskList=new();
-    [ObservableProperty] ObservableCollection<string> dayList = new();
+    [ObservableProperty] public AssignedTask selectedAssignedTask= new();
+
+
+    [ObservableProperty] public ObservableCollection<string> sunWatchPersonaleList = new();
+    [ObservableProperty] public ObservableCollection<string> taskList = new();
+    [ObservableProperty] public ObservableCollection<string> dayList = new();
+    
+
+    [ObservableProperty] public ObservableCollection<AssignedTask> assignedTaskList = new();
+   
+
+
+
 
     public TaskAssignmentViewModel()
     {
@@ -47,6 +56,7 @@ public partial class TaskAssignmentViewModel : ObservableObject
         PopulateSunWatchPersonaleList();
         PopulateTasksList();
         PopulateDayList();
+        GetAllAssignedTasks();
     }
 
    public void PopulateSunWatchPersonaleList()
@@ -56,7 +66,7 @@ public partial class TaskAssignmentViewModel : ObservableObject
         {
             foreach(SunWatchPersonale sunwatchpersonale in SunWatchPersonales)
             {
-                sunWatchPersonaleList.Add(sunwatchpersonale.SunWatch_personale_name+" ("+sunwatchpersonale.SunWatch_personale_shift+" Shift)");
+                sunWatchPersonaleList.Add(sunwatchpersonale.SunWatch_personale_name+"("+sunwatchpersonale.SunWatch_personale_shift+" Shift)");
             }
             
         }
@@ -96,17 +106,23 @@ public partial class TaskAssignmentViewModel : ObservableObject
         Saturday = 6,
     }
 
+    [RelayCommand]
     public void GetAllAssignedTasks()
     {
+        AssignedTasks.Clear();
         AssignedTasks = AssignedTaskRepo.GetAssignedTasks();
-        if (AssignedTasks != null)
-        {
-            foreach (AssignedTask assignedtask in AssignedTasks)
-            {
-                assignedTaskList.Add(assignedtask.Assigned_task_id+" "+assignedtask.Assigned_task_sunwatch_personale_name+" "+assignedtask.Assigned_task_name);
-            }
 
+        if(AssignedTaskList.Count!=0)
+        {
+            AssignedTaskList.Clear();
         }
+
+        foreach(var assignedtask in AssignedTasks)
+        {
+            AssignedTaskList.Add(assignedtask);
+        }
+      
+
 
     }
 
@@ -126,25 +142,49 @@ public partial class TaskAssignmentViewModel : ObservableObject
         {
 
         }
+
+        GetAllAssignedTasks();
+
     }
 
     [RelayCommand]
     public async void RemoveAssignedTask()
     {
+        int AssignedTaskId;
+        if(SelectedAssignedTask==null)
+        {
+            AssignedTaskStatusMessage = "Error: Failed To Remove Log.";
+            await Task.Delay(2000);
+            AssignedTaskStatusMessage = "";
+            return;
+        }
+
+        else
+        {
+            AssignedTaskId = SelectedAssignedTask.Assigned_task_id;
+        }
+
+        if(AssignedTaskId==1)
+        {
+            return;
+        }
+        else
+        {
+            try
+            {
+                AssignedTaskRepo.DeleteAssignedTask(AssignedTaskId);
+                GetAllAssignedTasks();
+            }
+            catch (Exception ex)
+            {
+                AssignedTaskStatusMessage = "Error: Failed To Remove Assigned Task. " + ex.Message;
+                await Task.Delay(2000);
+                AssignedTaskStatusMessage = "";
+            }
+
+        }
 
     }
-
-    [RelayCommand]
-    public async void UpdateAssignedTask()
-    {
-
-    }
-
-
-
-
-    
-
 
 }
 

@@ -46,7 +46,7 @@ public partial class MainPage : ContentPage
         }
 	}
 
-    private async void RemoveButton_Clicked(object sender, EventArgs e)
+    private async void UpdateButton_Clicked(object sender, EventArgs e)
     {
 
 		if(selectLog.SelectedItem != null)
@@ -79,7 +79,7 @@ public partial class MainPage : ContentPage
 		
     }
 
-    private void Button_Clicked_EmailPassdownLog(object sender, EventArgs e)
+    private void EmailPassdownLog_ButtonClicked(object sender, EventArgs e)
     {
         LogEmailDistributionList = LogEmailDistributionRepo.GetLogEmailDistribution();
         foreach (LogEmailDistribution logEmailDistribution in LogEmailDistributionList)
