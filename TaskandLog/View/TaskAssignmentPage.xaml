@@ -90,7 +90,7 @@
                     <Button Command="{Binding AddAssignedTaskCommand}" Text="Add Assignment" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Button Command="{Binding RemoveAssignedTaskCommand}" Text="Delete Assignment" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Button Clicked="UpdateAssignment_ButtonClicked" Text="Update Assignment" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <DatePicker Date="{Binding TodaysDate}" MinimumDate="{Binding MinDate}" MaximumDate="{Binding MaxDate}" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16"></DatePicker>
+                    <DatePicker Date="{Binding SelectedDate}" MinimumDate="{Binding MinDate}" MaximumDate="{Binding MaxDate}" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="16"></DatePicker>
                     
                 </VerticalStackLayout>
 
@@ -101,13 +101,13 @@
                             <DataTemplate x:DataType="tables:AssignedTask">
                                 <Grid Padding="10">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="80" />
+                                        <RowDefinition Height="100" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="50" />
-                                        <ColumnDefinition Width="150" />
-                                        <ColumnDefinition Width="150" />
-                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="300" />
+                                        <ColumnDefinition Width="200" />
                                     </Grid.ColumnDefinitions>
 
 
@@ -130,10 +130,6 @@
 
                     </CollectionView>
 
-               
-                
-        
-                
             </HorizontalStackLayout>
 
             <Label Grid.Row="2" Grid.Column="1" Text="Tasks" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
@@ -145,7 +141,23 @@
             <Label Grid.Row="4" Grid.Column="1" Text="MOMS/MCC" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
             <Label Grid.Row="5" Grid.Column="1" Text="SCADA" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
             <Label Grid.Row="6" Grid.Column="1" Text="P2000" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
-            
+
+            <Label Grid.Row="3" Grid.Column="2"  Text="{Binding EmailOrionFirstShift}" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="3" Grid.Column="3"  Text="{Binding EmailOrionSecondShift}" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="3" Grid.Column="4"  Text="{Binding EmailOrionThirdShift}" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+
+            <Label Grid.Row="4" Grid.Column="2"  Text="{Binding MomsMccFirstShift}" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="4" Grid.Column="3"  Text="{Binding MomsMccSecondShift}" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="4" Grid.Column="4"  Text="{Binding MomsMccThirdShift}" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+
+            <Label Grid.Row="5" Grid.Column="2"  Text="{Binding ScadaFirstShift}" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="5" Grid.Column="3"  Text="{Binding ScadaSecondShift}" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="5" Grid.Column="4"  Text="{Binding ScadaThirdShift}" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+
+            <Label Grid.Row="6" Grid.Column="2"  Text="{Binding P2000FirstShift}" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="6" Grid.Column="3"  Text="{Binding P2000SecondShift}" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="6" Grid.Column="4"  Text="{Binding P2000ThirdShift}" TextColor="Red" FontAttributes="Bold" FontFamily="ArialBlack" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+
         </Grid>
       
      

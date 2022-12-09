@@ -53,5 +53,12 @@ namespace TaskandLog.TableRepositories
             Init();
             return Database.DatabaseConnection.Table<SunWatchPersonale>().ToList();
         }
+
+        public TableQuery<SunWatchPersonale> QueryBySunWatchPersonaleName(string SunWatchPersonaleName)
+        {
+            Init();
+            return Database.DatabaseConnection.Table<SunWatchPersonale>().Where(value => value.SunWatch_personale_name.Equals(SunWatchPersonaleName));
+
+        }
     }
 }

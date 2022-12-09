@@ -55,5 +55,12 @@ namespace TaskandLog.TableRepositories
             Init();
             return Database.DatabaseConnection.Table<AssignedTask>().ToList();
         }
+
+        public TableQuery<AssignedTask> QueryByTaskNameAndDay(string TaskName, string Day)
+        {
+            Init();
+            return Database.DatabaseConnection.Table<AssignedTask>().Where(value => value.Assigned_task_name.Equals(TaskName) && value.Assigned_task_day.Equals(Day));
+
+        }
     }
 }
