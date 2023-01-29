@@ -4,8 +4,7 @@
 
 ![image](https://user-images.githubusercontent.com/91855477/208279875-eb55a846-5114-4c52-a1e0-dbdb28412760.png)
 
-# After filling out the input fields a user can add a log entry which will then populate a list and display the log to the user. Each log entry is
-# able to be selected then be updated or removed.
+# After filling out the input fields a user can add a log entry which will then populate a list and display the log to the user. Each log entry is able to be selected then be updated or removed.
 
 ![image](https://user-images.githubusercontent.com/91855477/208282991-19a53aff-6fa5-4117-8c8c-a471aaee6f29.png)
 
