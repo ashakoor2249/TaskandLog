@@ -1,6 +1,6 @@
 # TaskandLog is an update version of both PassdownLog and TaskAssignment programs for SunWatch written in C# and XAML utilizing the .NET MAUI framework. 
 # An SQLite database is utilized for application data in the program instead of text files. 
-# The application first opens into the passdown login portion.
+# The application first opens into the passdown log portion.
 
 ![image](https://user-images.githubusercontent.com/91855477/208279875-eb55a846-5114-4c52-a1e0-dbdb28412760.png)
 
