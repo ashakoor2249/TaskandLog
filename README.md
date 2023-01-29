@@ -14,7 +14,7 @@
 
 ![image](https://user-images.githubusercontent.com/91855477/208283201-e328d7c4-92b8-4612-9577-cda18b464bc1.png)
 
-Once an task is assigned the person is added to the list and shows up in the grid.
+Once a task is assigned the person is added to the list and shows up in the grid.
 
 ![image](https://user-images.githubusercontent.com/91855477/208283255-7ab2c4cf-5998-4e46-b670-0a67f8631987.png)
 
